@@ -15,11 +15,11 @@
           <el-submenu index="1">
             <template slot="title">
               <i class="el-icon-document-checked"></i>
-              <span>学籍信息</span>
+              <span>学生学籍</span>
             </template>
             <el-menu-item index="/check"><i class="el-icon-user"></i>本人</el-menu-item>
             <el-menu-item index="/checkM"><i class="el-icon-user-solid"></i>班主任</el-menu-item>
-            <el-menu-item index="1-2">
+            <el-menu-item index="/guidance">
               <i class="el-icon-s-check"></i>
               教导主任
               
@@ -28,7 +28,7 @@
           <el-submenu index="2">
             <template slot="title">
               <i class="el-icon-chat-dot-round"></i>
-              <span>注册信息</span>
+              <span>基本信息</span>
             </template>
             <el-menu-item index="/registerInfo"><i class="el-icon-chat-line-round"></i>查看信息</el-menu-item>
           </el-submenu>

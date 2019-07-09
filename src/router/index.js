@@ -5,7 +5,8 @@ import Register from '@/components/Register'
 import Index from '@/views/index'
 import Check from '@/views/Check'
 import CheckM from '@/views/checkM'
-import registerInfo from '@/views/registerInfo'
+import RegisterInfo from '@/views/registerInfo'
+import Guidance from  '@/views/guidance'
 
 Vue.use(Router)
 
@@ -41,7 +42,12 @@ export default new Router({
         {
           path:'/registerInfo',
           name: 'registerInfo',
-          component: registerInfo
+          component: RegisterInfo
+        },
+        {
+          path: '/guidance',
+          name: 'guidance',
+          component: Guidance
 
         }
       ]

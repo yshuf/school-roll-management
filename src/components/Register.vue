@@ -20,8 +20,8 @@
           <el-input type="text" v-model="ruleForm.id" autocomplete="off" placeholder="请输入账号"></el-input>
         </el-form-item>
         <!-- 密码 -->
-        <el-form-item label="密码" prop="pass">
-          <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="请输入密码"></el-input>
+        <el-form-item label="密码" prop="passwd">
+          <el-input type="password" v-model="ruleForm.passwd" autocomplete="off" placeholder="请输入密码"></el-input>
         </el-form-item>
         <!-- 邮箱地址 -->
         <el-form-item label="邮箱" prop="email" v-if="test()">
@@ -54,13 +54,13 @@ export default {
     return {
       ruleForm: {
         id: "",
-        pass: "",
+        passwd: "",
         identity: "",
         email: ""
       },
       rules: {
         id: [{ required: true, trigger: "blur" }],
-        pass: [
+        passwd: [
           { required: true, trigger: "blur" },
           { min: 6, max: 8, message: "密码必须要6到8 位之间" }
         ],
@@ -75,14 +75,21 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$message({
-            type: "success",
-            message: "注册成功，去登录"
-          });
-          this.$router.push("/");
+          this.$axios.post('/registered/student',{
+            passwd: this.ruleForm.passwd,
+            id: this.ruleForm.id
+          }).then(res=>{
+            console.log(res);
+            console.log(res.data.code);
+            if(res.data.code==11){
+              this.$message.success('注册成功，去登录');
+              this.$router.push('/');
+            }
+          }).catch(res=>{
+            this.$message.error(res.data.data.errorMap);
+          })
         } else {
-          console.log("error submit!!");
-          return false;
+          this.$message.error("注册失败，信息格式不正确");
         }
       });
     },

@@ -1,6 +1,7 @@
 <template>
+  <!-- 学生学籍表 -->
   <div class="info">
-    <h3>学生学籍表</h3>
+    <h3>学生个人学籍表</h3>
     <el-row>
       <el-col>
         <span class="name">姓名：</span>
@@ -17,11 +18,17 @@
         <span>籍贯：</span>
       </el-col>
     </el-row>
-    <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="date" label="年级" width="180" align="center"></el-table-column>
-      <el-table-column prop="name" label="入学时间" width="180" align="center"></el-table-column>
-      <el-table-column prop="address" label="所在学校" align="center"></el-table-column>
-      <el-table-column prop="address" label="班主任" align="center"></el-table-column>
+    <!-- 入学以来信息情况 -->
+    <el-table
+      :data="tableData"
+      border
+      style="width: 100%"
+      :header-cell-style="{background:'#f0d7d7',color:'#000'}"
+    >
+      <el-table-column prop="date" label="年级" width="100" align="center"></el-table-column>
+      <el-table-column prop="name" label="入学时间" width="100" align="center"></el-table-column>
+      <el-table-column prop="address" label="所在学校" align="center" width="220"></el-table-column>
+      <el-table-column prop="headmaster" label="班主任" align="center" width="100"></el-table-column>
     </el-table>
   </div>
 </template>
@@ -34,32 +41,38 @@ export default {
         {
           date: "一",
           name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄"
+          address: "上海市普陀区金沙江路 1518 弄",
+          headmaster: "李艳丽"
         },
         {
           date: "二",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1517 弄"
+          name: "王二虎",
+          address: "上海市普陀区金沙江路 1517 弄",
+          headmaster: "李艳"
         },
         {
           date: "三",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1519 弄"
+          name: "王大虎",
+          address: "上海市普陀区金沙江路 1519 弄",
+          headmaster: "李艳"
         },
         {
           date: "四",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
+          name: "王虎",
+          address: "上海市普陀区金沙江路 1516 弄",
+          headmaster: "李艳"
         },
         {
           date: "五",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
+          name: "王琉虎",
+          address: "上海市普陀区金沙江路 1516 弄",
+          headmaster: "李艳"
         },
         {
           date: "六",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1516 弄"
+          name: "王璃虎",
+          address: "上海市普陀区金沙江路 1516 弄",
+          headmaster: "李艳"
         }
       ]
     };
@@ -76,7 +89,7 @@ export default {
   margin: 50px auto;
 }
 h3 {
-  font-family:cursive;
+  font-family: cursive;
   font-style: oblique;
   letter-spacing: 10px;
 }
@@ -93,5 +106,6 @@ span {
 }
 .el-table {
   margin: 50px auto;
+  background-color: #f0d7d7;
 }
 </style>

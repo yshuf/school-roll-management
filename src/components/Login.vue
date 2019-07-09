@@ -13,8 +13,8 @@
         <el-form-item label="账号" prop="username">
           <el-input type="text" v-model="ruleForm.username" autocomplete="off" placeholder="请输入账号"></el-input>
         </el-form-item>
-        <el-form-item label="密码" prop="pass">
-          <el-input type="password" v-model="ruleForm.pass" autocomplete="off" placeholder="请输入密码"></el-input>
+        <el-form-item label="密码" prop="passwd">
+          <el-input type="password" v-model="ruleForm.passwd" autocomplete="off" placeholder="请输入密码"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="submitForm('ruleForm')">登录</el-button>
@@ -40,31 +40,41 @@ export default {
       }
     };
     return {
+      // 验证表单
       ruleForm: {
         username: "",
-        pass: ""
+        passwd: ""
       },
       rules: {
-        username: [{ required: true, trigger: "blur" }],
-        pass: [{ required: true, trigger: "blur" }]
+        username: [{ required: true, trigger: "blur",message: "账号为你的身份证号" }],
+        passwd: [{ required: true, trigger: "blur" }]
       }
     };
   },
   methods: {
+    // 登录处理函数
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          alert("submit!");
-          this.$router.push('/index');
+          this.$axios.post('/goLogin',this.ruleForm).then(res=>{
+            if(res.status==200) {
+              this.$message.success("登录成功！欢迎你！");
+              this.$router.push('/index');
+              console.log(res);
+            }
+          }).catch(err=>{
+            this.$message.error(err);
+          });
         } else {
-          console.log("error submit!!");
-          return false;
+          this.$message.error("密码和账号格式不正确哦！！！");
         }
       });
     },
+    // 重置按钮
     resetForm(formName) {
       this.$refs[formName].resetFields();
     },
+    // 去注册
     toRegister(){
         this.$router.push('/register');
     }

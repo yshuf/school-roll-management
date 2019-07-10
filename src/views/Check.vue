@@ -22,13 +22,14 @@
     <el-table
       :data="tableData"
       border
-      style="width: 100%"
+      style="width: 45%"
       :header-cell-style="{background:'#f0d7d7',color:'#000'}"
     >
-      <el-table-column prop="date" label="年级" width="100" align="center"></el-table-column>
-      <el-table-column prop="name" label="入学时间" width="100" align="center"></el-table-column>
-      <el-table-column prop="address" label="所在学校" align="center" width="220"></el-table-column>
-      <el-table-column prop="headmaster" label="班主任" align="center" width="100"></el-table-column>
+      <el-table-column prop="id" label="年级" width="100" align="center"></el-table-column>
+      <el-table-column prop="s" label="入学时间" width="100" align="center"></el-table-column>
+      <el-table-column prop="e" label="结束时间" width="100" align="center"></el-table-column>
+      <el-table-column prop="sc" label="所在学校" align="center" width="220"></el-table-column>
+      <el-table-column prop="t" label="班主任" align="center" width="100"></el-table-column>
     </el-table>
   </div>
 </template>
@@ -37,56 +38,74 @@
 export default {
   data() {
     return {
+      name: "",
       tableData: [
         {
-          date: "一",
-          name: "王小虎",
-          address: "上海市普陀区金沙江路 1518 弄",
-          headmaster: "李艳丽"
+          id: '一',
+          s: '',
+          e: '',
+          sc: '',
+          t: ''
         },
         {
-          date: "二",
-          name: "王二虎",
-          address: "上海市普陀区金沙江路 1517 弄",
-          headmaster: "李艳"
+          id: '二',
+          s: '',
+          e: '',
+          sc: '',
+          t: ''
         },
         {
-          date: "三",
-          name: "王大虎",
-          address: "上海市普陀区金沙江路 1519 弄",
-          headmaster: "李艳"
+          id: '三',
+          s: '',
+          e: '',
+          sc: '',
+          t: ''
         },
         {
-          date: "四",
-          name: "王虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-          headmaster: "李艳"
+          id: '四',
+          s: '',
+          e: '',
+          sc: '',
+          t: ''
         },
         {
-          date: "五",
-          name: "王琉虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-          headmaster: "李艳"
+          id: '五',
+          s: '',
+          e: '',
+          sc: '',
+          t: ''
         },
         {
-          date: "六",
-          name: "王璃虎",
-          address: "上海市普陀区金沙江路 1516 弄",
-          headmaster: "李艳"
+          id: '六',
+          s: '',
+          e: '',
+          sc: '',
+          t: ''
         }
       ]
     };
   },
-  methods: {}
+  mounted(){
+    this.getDetailMsg();
+  },
+  methods: {
+    getDetailMsg(){
+      this.$axios.get('/student/detail?idCardNumber='+"360730199704261188").then(res=>{
+        console.log(res);
+        if(res.data.code==33){
+          this.$message.success(res.data.msg);
+        }
+      }).catch(err=>{
+        console.log(err);
+      })
+    }
+  }
 };
 </script>
 
 <style scoped>
 .info {
-  width: 800px;
-  height: 600px;
-  box-shadow: 2px 2px 14px #ccc;
-  margin: 50px auto;
+  width: 10;
 }
 h3 {
   font-family: cursive;

@@ -30,7 +30,7 @@
               <i class="el-icon-chat-dot-round"></i>
               <span>基本信息</span>
             </template>
-            <el-menu-item index="/registerInfo"><i class="el-icon-chat-line-round"></i>查看信息</el-menu-item>
+            <el-menu-item index="/simpleInfo"><i class="el-icon-chat-line-round"></i>查看信息</el-menu-item>
           </el-submenu>
         </el-menu>
       </el-col>

@@ -21,7 +21,12 @@
         </el-form-item>
         <!-- 密码 -->
         <el-form-item label="密码" prop="passwd">
-          <el-input type="password" v-model="ruleForm.passwd" autocomplete="off" placeholder="请输入密码"></el-input>
+          <el-input
+            type="password"
+            v-model="ruleForm.passwd"
+            autocomplete="off"
+            placeholder="请输入密码"
+          ></el-input>
         </el-form-item>
         <!-- 邮箱地址 -->
         <el-form-item label="邮箱" prop="email" v-if="test()">
@@ -62,7 +67,7 @@ export default {
         id: [{ required: true, trigger: "blur" }],
         passwd: [
           { required: true, trigger: "blur" },
-          { min: 6, max: 8, message: "密码必须要6到8 位之间" }
+          { min: 6, max: 8, message: "密码必须要6到8 位之间,以字母开头" }
         ],
         identity: [
           { required: true, message: "请选择身份", trigger: "change" }
@@ -75,19 +80,22 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$axios.post('/registered/student',{
-            passwd: this.ruleForm.passwd,
-            id: this.ruleForm.id
-          }).then(res=>{
-            console.log(res);
-            console.log(res.data.code);
-            if(res.data.code==11){
-              this.$message.success('注册成功，去登录');
-              this.$router.push('/');
-            }
-          }).catch(res=>{
-            this.$message.error(res.data.data.errorMap);
-          })
+          let id = this.ruleForm.id;
+          let passwd = this.ruleForm.passwd;
+          let url =
+            this.ruleForm.identity == "student"
+              ? "/registered/student?id=" + id + "&passwd=" + passwd
+              : "/registered/managerment?id=" + id + "&passwd=" + passwd;
+          this.$axios
+            .post(url)
+            .then(res => {
+              if (res.data.code == 11) {
+                this.$message.success(res.data.data);
+                this.$router.push("/");
+              } else {
+                this.$message.error(res.data.msg + "," + res.data.data);
+              }
+            });
         } else {
           this.$message.error("注册失败，信息格式不正确");
         }

@@ -33,8 +33,8 @@ export default {
       if (value === "") {
         callback(new Error("请输入密码"));
       } else {
-        if (this.ruleForm.checkPass !== "") {
-          this.$refs.ruleForm.validateField("checkPass");
+        if (this.ruleForm.passwd !== "") {
+          this.$refs.ruleForm.validateField("passwd");
         }
         callback();
       }
@@ -56,8 +56,10 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
-          this.$axios.post('/goLogin',this.ruleForm).then(res=>{
-            if(res.status==200) {
+          let username=this.ruleForm.username;
+          let passwd=this.ruleForm.passwd;
+          this.$axios.post('/goLogin?username='+username+"&passwd="+passwd,).then(res=>{
+            if(res.data.code=11) {
               this.$message.success("登录成功！欢迎你！");
               this.$router.push('/index');
               console.log(res);

@@ -5,7 +5,7 @@ import Register from '@/components/Register'
 import Index from '@/views/index'
 import Check from '@/views/Check'
 import CheckM from '@/views/checkM'
-import RegisterInfo from '@/views/registerInfo'
+import SimpleInfo from '@/views/simpleInfo'
 import Guidance from  '@/views/guidance'
 
 Vue.use(Router)
@@ -40,9 +40,9 @@ export default new Router({
           component:CheckM
         },
         {
-          path:'/registerInfo',
-          name: 'registerInfo',
-          component: RegisterInfo
+          path:'/simpleInfo',
+          name: 'simpleInfo',
+          component: SimpleInfo
         },
         {
           path: '/guidance',
